@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    <title>Корзина</title>
+{% endblock %}
+
+{% block content %}
+<section class="cart-page">
+    <h1>Корзина</h1>
+    <div class="cart-items">
+        {% for book in books %}
+            <div class="cart-item">
+                <div class="cart-item-image">
+                    <img src="{{ book.image.url }}" alt="{{ book.bookName }}">
+                </div>
+                <div class="cart-item-info">
+                    <h3>{{ book.bookName }}</h3>
+                    <p>Автор: {{ book.author }}</p>
+                    <p>Цена: {{ book.price }} руб.</p>
+                </div>
+                <div class="cart-item-actions">
+                    <form action="{% url 'remove_from_cart' book.pk %}" method="POST">
+                        {% csrf_token %}
+                        <button type="submit" class="remove-from-cart-btn">Удалить</button>
+                    </form>
+                </div>
+            </div>
+        {% empty %}
+            <p>Ваша корзина пуста.</p>
+        {% endfor %}
+    </div>
+    <div class="cart-actions">
+        <button class="checkout-btn" disabled>Оплатить</button>
+    </div>
+</section>
+
+<style>
+    .cart-page {
+        padding: 40px 20px;
+    }
+    .cart-items {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+    .cart-item {
+        display: flex;
+        align-items: center;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 10px;
+        background-color: #fff;
+    }
+    .cart-item-image img {
+        max-width: 100px;
+        max-height: 150px;
+        object-fit: cover;
+        border-radius: 4px;
+    }
+    .cart-item-info {
+        flex: 1;
+        margin-left: 20px;
+    }
+    .cart-item-info h3 {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+    .cart-item-info p {
+        font-size: 14px;
+        color: #555;
+    }
+    .cart-item-actions {
+        margin-left: 20px;
+    }
+    .remove-from-cart-btn {
+        background-color: #dc3545;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: background-color 0.3s ease;
+    }
+    .remove-from-cart-btn:hover {
+        background-color: #c82333;
+    }
+    .cart-actions {
+        margin-top: 20px;
+        text-align: right;
+    }
+    .checkout-btn {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        cursor: not-allowed;
+        font-size: 16px;
+    }
+</style>
+{% endblock %}

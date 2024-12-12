@@ -1,0 +1,85 @@
+<!-- main/templates/catalog.html -->
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    <title>Каталог книг</title>
+{% endblock %}
+
+{% block content %}
+<section class="catalog-block">
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h2>Жанры</h2>
+        </div>
+        <div class="sidebar-list">
+            <ul>
+                {% for genre in genres %}
+                    <li><a href="{% url 'catalog' %}?genre={{ genre.id }}">{{ genre.genreName }}</a></li>
+                {% endfor %}
+                <li><a href="{% url 'catalog' %}" class="reset-filter-btn">Сбросить фильтр</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="main-content">
+        <div class="main-header">
+            <h1>Каталог книг</h1>
+        </div>
+        <div class="book-cards">
+            {% for book in books %}
+                {% include "components/cards/book_card.html" with book=book %}
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<style>
+    .catalog-block {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+        padding: 20px;
+    }
+    .sidebar {
+        width: 20%;
+        background-color: #f4f4f4;
+        padding: 10px;
+        border-radius: 4px;
+    }
+    .sidebar-header {
+        margin-bottom: 10px;
+    }
+    .sidebar-list {
+        list-style-type: none;
+        padding: 0;
+    }
+    .sidebar-list li {
+        margin-bottom: 5px;
+    }
+    .sidebar-list li a {
+        text-decoration: none;
+        color: #333;
+    }
+    .sidebar-list li a:hover {
+        color: #007bff;
+    }
+    .reset-filter-btn {
+        color: #dc3545;
+        font-weight: bold;
+    }
+    .reset-filter-btn:hover {
+        color: #c82333;
+    }
+    .main-content {
+        width: 80%;
+    }
+    .main-header {
+        margin-bottom: 20px;
+    }
+    .book-cards {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+</style>
+{% endblock %}

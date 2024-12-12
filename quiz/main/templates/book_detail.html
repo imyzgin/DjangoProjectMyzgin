@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    <title>{{ book.bookName }}</title>
+{% endblock %}
+
+{% block content %}
+<section class="book-detail">
+    <div class="book-detail-container">
+        <div class="book-image">
+            <img src="{{ book.image.url }}" alt="{{ book.bookName }}">
+        </div>
+        <div class="book-info">
+            <h1 class="book-title">{{ book.bookName }}</h1>
+            <p class="book-author">Автор: {{ book.author }}</p>
+            <p class="book-publisher">Издатель: {{ book.publisher }}</p>
+            <p class="book-year">Год публикации: {{ book.yearOfPublication }}</p>
+            <p class="book-price">Цена: {{ book.price }} руб.</p>
+            <p class="book-quantity">Количество: {{ book.quantity }}</p>
+            <div class="book-genres">
+                <p>Жанры:</p>
+                <ul>
+                    {% for genre in book.genre.all %}
+                        <li>{{ genre.genreName }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="book-description">
+                <h3>Описание:</h3>
+                <p>{{ book.desc }}</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Блок для отзывов -->
+<section class="reviews">
+    <h2>Отзывы</h2>
+    {% for review in book.review_set.all %}
+        <div class="review">
+            <p class="review-text">{{ review.reviewText }}</p>
+            <p class="review-author">Автор: {{ review.email }}</p>
+        </div>
+    {% empty %}
+        <p>Пока нет отзывов.</p>
+    {% endfor %}
+</section>
+
+<style>
+    .reviews {
+        margin-top: 40px;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .reviews h2 {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        color: #333;
+    }
+    .review {
+        margin-bottom: 20px;
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+    }
+    .review-text {
+        font-size: 16px;
+        color: #555;
+        margin-bottom: 10px;
+    }
+    .review-author {
+        font-size: 14px;
+        color: #777;
+    }
+</style>
+{% endblock %}

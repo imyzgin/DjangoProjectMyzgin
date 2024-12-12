@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel ="stylesheet" href ="/static/style.css"/>
+        <title>Сайт про книги</title>
+    </head>
+    <body>
+        
+        <header>
+            <h1>Authors</h1>
+        </header>
+        <ul>
+        {% for author in authors %}
+            <li>{{ author.firstName }} {{author.lastName}}</li>
+        {%endfor%}
+        </ul>
+
+    </body>
+</html>

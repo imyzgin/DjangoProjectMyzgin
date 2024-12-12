@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    <title>Контакты</title>
+{% endblock %}
+
+{% block content %}
+<section class="contacts-block">
+    <div class="title">
+        <h1>Контакты</h1>
+    </div>
+    <div class="contact-info">
+        <p>Адрес: г. Сургут, ул. Гагарина, Д.35</p>
+        <p>Телефон: +7 (123) 456-78-90</p>
+        <p>Email: test@book.com</p>
+    </div>
+    <div class="contact-form">
+        <h2>Свяжитесь с нами</h2>
+        <form action="{% url 'contacts' %}" method="post">
+            {% csrf_token %}
+            {{ form }}
+            <button type="submit">Отправить</button>
+        </form>
+    </div>
+</section>
+
+<style>
+    .contacts-block {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 20px;
+    }
+    .contact-info {
+        margin-bottom: 20px;
+    }
+    .contact-form {
+        width: 100%;
+        max-width: 500px;
+    }
+    .contact-form label {
+        display: block;
+        margin-bottom: 5px;
+    }
+    .contact-form input, .contact-form textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+    .contact-form button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    .contact-form button:hover {
+        background-color: #0056b3;
+    }
+</style>
+{% endblock %}

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel ="stylesheet" href ="/static/style.css"/>
+        <title>Сайт про книги</title>
+    </head>
+    <body>
+
+        <header>
+            <h1>Publishers</h1>
+        </header>
+        <ul>
+        {% for publisher in publishers %}
+            <li>{{ publisher.email }}</li>
+        {%endfor%}
+        </ul>
+
+    </body>
+</html>

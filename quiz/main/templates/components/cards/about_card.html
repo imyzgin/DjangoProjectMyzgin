@@ -1,0 +1,35 @@
+{%load static%}
+<div class="about-card">
+    <div class="image">
+        <img src="{%static 'images/r1.jpg'%}" alt="Картинка">
+    </div>
+    <div class="card-desc">
+        <p>Какой-то текст</p>
+    </div>
+</div>
+
+<style>
+    .card-desc {
+        text-align: center;
+    }
+    .about-card {
+        display: flex;
+        flex-direction: column;
+        width: 600px; /* Увеличенная ширина */
+        height: 600px; /* Увеличенная высота */
+        margin: 20px;
+        border: 1px solid black;
+        padding: 10px; 
+        box-sizing: border-box; 
+    }
+    .image {
+        flex: 1; 
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .image img {
+        max-width: 100%;
+        max-height: 100%;
+    }
+</style>
